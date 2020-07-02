@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         $this->belongsToMany(Group::class)->withTimestamps();
     }
+    
+    public function location()
+    {
+        $this->hasOneThrough(Location::class, Profile::class);
+    }
 }
