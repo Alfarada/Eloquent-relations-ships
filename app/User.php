@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         $this->belongsTo(Level::class);
     }
+    
+    public function groups()
+    {
+        $this->belongsToMany(Group::class)->withTimestamps();
+    }
 }
