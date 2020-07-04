@@ -1,6 +1,6 @@
 <?php
 
-use App\{Category, Group, Image, Level, User, Profile, Location, Post, Tag};
+use App\{Category, Comment, Group, Image, Level, User, Profile, Location, Post, Tag, Video};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
