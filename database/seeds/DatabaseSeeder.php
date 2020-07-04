@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
         $values = [];
 
         for ($i=1; $i < $max; $i++) { 
-                $values = $i;
+                $values[] = $i;
         }
 
         return $values; 

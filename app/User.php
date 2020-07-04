@@ -49,17 +49,17 @@ class User extends Authenticatable
 
     public function level()
     {
-        $this->belongsTo(Level::class);
+        return $this->belongsTo(Level::class);
     }
     
     public function groups()
     {
-        $this->belongsToMany(Group::class)->withTimestamps();
+        return $this->belongsToMany(Group::class)->withTimestamps();
     }
     
     public function location()
     {
-        $this->hasOneThrough(Location::class, Profile::class);
+        return $this->hasOneThrough(Location::class, Profile::class);
     }
 
     public function videos()
