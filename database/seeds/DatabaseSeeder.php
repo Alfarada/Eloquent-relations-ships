@@ -1,6 +1,6 @@
 <?php
 
-use App\{Group, Level, User, Profile, Location};
+use App\{Category, Group, Image, Level, User, Profile, Location, Post, Tag};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +27,33 @@ class DatabaseSeeder extends Seeder
                 ->make([
                     'url' => 'https://lorempixel.com/90/90/'
                 ]));
+        });
+
+        factory(Category::class, 4)->create();
+        factory(Tag::class, 12)->create();
+
+        factory(Post::class, 40)->create()->each( function ($post){
+
+            $post->image()->save(factory(Image::class)->make());
+            $post->tags()->attach($this->array(rand(1, 12)));
+
+            $number_comments = rand(1, 6);
+
+            for ($i=0; $i < $number_comments; $i++) { 
+                $post->comments()->save(factory(Comment::class)->make());
+            }
+        });
+
+        factory(Video::class, 40)->create()->each( function ($video){
+
+            $video->image()->save(factory(Image::class)->make());
+            $video->tags()->attach($this->array(rand(1, 12)));
+
+            $number_comments = rand(1, 6);
+
+            for ($i=0; $i < $number_comments; $i++) { 
+                $video->comments()->save(factory(Comment::class)->make());
+            }
         });
     }
 
