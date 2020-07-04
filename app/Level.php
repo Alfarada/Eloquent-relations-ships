@@ -10,4 +10,14 @@ class Level extends Model
     {
         $this->hasMany(User::class);
     }
+
+    public function posts()
+    {
+        $this->hasManyThrough(Post::class, User::class);
+    }
+
+    public function videos()
+    {
+        $this->hasManyThrough(Video::class, User::class);
+    }
 }

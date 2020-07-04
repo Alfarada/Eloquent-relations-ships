@@ -37,6 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -56,4 +61,20 @@ class User extends Authenticatable
     {
         $this->hasOneThrough(Location::class, Profile::class);
     }
+
+    public function videos()
+    {
+        return $this->hasMany(Videos::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
 }
