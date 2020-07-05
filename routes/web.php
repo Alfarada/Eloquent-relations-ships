@@ -11,6 +11,7 @@
 |
 */
 
+use App\Level;
 use App\User;
 
 Route::get('/', function () {
@@ -36,3 +37,22 @@ Route::get('/profile/{id}', function ($id) {
     return view('profile', compact('user', 'posts', 'videos'));
 
 })->name('profile');
+
+Route::get('/level/{id}', function ($id) {
+
+    $level = Level::find($id);
+    $user = User::find($id);
+    
+    $posts = $level->posts()
+                ->with('category', 'image', 'tags')
+                ->withCount('comments')
+                ->get(); 
+
+    $videos = $level->videos()
+                ->with('category', 'image', 'tags')
+                ->withCount('comments')
+                ->get();
+
+    return view('level', compact('user','level', 'posts', 'videos'));
+
+})->name('level');
