@@ -22,8 +22,17 @@ Route::get('/profile/{id}', function ($id) {
     
     $user = User::find($id);
     
-    return view('profile', [
-        'user' => $user
-    ]);
+    $posts = $user->posts()
+                ->with('category', 'image', 'tags')
+                ->withCount('comments')
+                ->get(); 
+
+    $videos = $user->videos()
+                ->with('category', 'image', 'tags')
+                ->withCount('comments')
+                ->get();
+
+
+    return view('profile', compact('user', 'posts', 'videos'));
 
 })->name('profile');
